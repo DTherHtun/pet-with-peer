@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: hola-pet
+spec:
+  serviceName: hola-pet
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hola-pet
+    spec:
+      containers:
+      - name: hola-pet
+        image: quay.io/dther/pet:peer
+        ports:
+        - name: http
+          containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /var/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      resources:
+        requests:
+          storage: 1Mi
+      accessModes:
+      - ReadWriteOnce

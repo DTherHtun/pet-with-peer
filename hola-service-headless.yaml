@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hola-pet
+spec:
+  clusterIP: None
+  selector:
+    app: hola-pet
+  ports:
+  - name: http
+    port: 80
